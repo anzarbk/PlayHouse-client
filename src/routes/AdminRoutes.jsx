@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from '../pages/admin/login';
+import Login from '../pages/admin/Login';
 import Dashboard from '../pages/admin/Dashboard';
 import Theatre from '../pages/admin/Theatre';
 import User from '../pages/admin/User';
 import LineChartsAdmin from '../components/Admin-UI/LineChartsAdmin';
 
-const adminRoutes = () => {
+const AdminRoutes = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -18,4 +18,4 @@ const adminRoutes = () => {
   );
 };
 
-export default adminRoutes;
+export default AdminRoutes;
