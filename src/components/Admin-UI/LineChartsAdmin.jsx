@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Chart, ArcElement } from 'chart.js';
-Chart.register(ArcElement);
 
 const data = [
   {
