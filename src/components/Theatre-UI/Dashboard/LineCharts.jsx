@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Chart, ArcElement } from 'chart.js';
+// import { Chart, ArcElement } from 'chart.js';
 import { useSelector } from 'react-redux';
 import { getChartDataAPI } from '../../../APIs/Theatre';
-Chart.register(ArcElement);
+// Chart.register(ArcElement);
 
 const LineCharts = () => {
   const [data, setData] = useState();
