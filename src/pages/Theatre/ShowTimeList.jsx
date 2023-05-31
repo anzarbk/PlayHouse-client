@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Layout from '../../components/User-UI/Layout';
 import TheatreSidebar from '../../components/Theatre-UI/Dashboard/TheatreSidebar';
 import { useNavigate } from 'react-router-dom';
-import ShowTimeElement from '../../components/Theatre-UI/showTimeElement';
+import ShowTimeElement from '../../components/Theatre-UI/ShowTimeElement';
 
 const ShowTimeList = () => {
   const currentUserToken = useSelector((state) => state?.token?.data);
