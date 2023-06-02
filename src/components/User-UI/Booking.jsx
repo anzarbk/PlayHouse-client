@@ -2,39 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { getSeatCharterDataBYNameAPI } from '../../APIs/Theatre';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Others/Loading';
 
 const Booking = ({ theatre }) => {
-  // const [newTheatre, setNewTheatre] = useState([]);
-  // const [dates, setDates] = useState([]);
-  // //   console.log(theatre);
-  // const fiteringTheatre = (theatre) => {
-  //   let theatreArr = new Set();
-  //   let DatesArr = new Set();
-  //   for (let i = 0; i < theatre.length; i++) {
-  //     theatreArr.add(theatre[i].theatre.name);
-  //     let dateString1 = theatre[i].Date;
-  //     const date1 = new Date(dateString1);
-  //     const day1 = date1.getUTCDate();
-  //     DatesArr.add(day1);
-  //   }
-  //   // console.log(theatreArr.length, DatesArr.size);
-  //   let arr1 = [];
-  //   let arr2 = [];
-  //   theatreArr.forEach((el) => {
-  //     arr1.push(el);
-  //   });
-  //   DatesArr.forEach((el) => {
-  //     arr2.push(el);
-  //   });
-  //   console.log(arr1, arr2);
-  //   setNewTheatre(arr1);
-  //   setDates(arr2);
-  // };
-  // //   console.log(newTheatre);
-  // useEffect(() => {
-  //   fiteringTheatre(theatre);
-  // }, []);
-  // console.log(newTheatre, dates);
   const currentUserToken = useSelector((state) => state?.token?.data);
   const navigate = useNavigate();
 
@@ -66,8 +36,6 @@ const Booking = ({ theatre }) => {
       }
     }
     console.log(arr2);
-    if (!arr2) {
-    }
     setShows(arr2);
   };
   const showSeats = async (show) => {

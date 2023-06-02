@@ -10,6 +10,7 @@ import Navbar from '../../components/User-UI/Navbar';
 //sdgvdfgdfgdfgd
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import Loading from '../../components/Others/Loading';
 //alert component
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -33,6 +34,7 @@ const SeatcharterUserView = () => {
   let [newAmount, setNewAmount] = useState(0);
   const [image, setImage] = useState('');
   const [seatError, setSeatError] = useState('');
+  const [preloader, setPreloader] = useState(false);
 
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
@@ -71,28 +73,17 @@ const SeatcharterUserView = () => {
     }
     invoke();
   }, [seatUpdates]);
-  // useEffect(() => {
-  //   async function invoke() {
-  //     const showss = await getShowDataByIdAPI(id, currentUserToken);
-  //     if (showss.status) {
-  //       setShowDetail(showss.show);
-  //     }
-  //   }
-  // }, [seatUpdates]);
+
   useEffect(() => {
-    // console.log(row, newSeats);
+    setPreloader(true);
     const final = [];
     for (let i = 0; i < row; i++) {
       final.push(<RowComp arr={newSeats} row={i + 1} />);
     }
     setFinale(final);
+    setPreloader(false);
   }, [newSeats]);
-  // const initialOptions = {
-  //   'client-id': import.meta.env.VITE_PAYPAL_CLIENT_ID,
-  //   currency: 'INR',
-  //   intent: 'capture',
-  //   'data-client-token': 'abc123xyz==',
-  // };
+
   let arr = [];
   const selectSeat = async (no) => {
     // console.log(no);
@@ -191,7 +182,7 @@ const SeatcharterUserView = () => {
 
   const paymentWithWallet = async (orderID, populatedShow, showDetail, amount, seat) => {
     if (amount > wallet) {
-      setWalletError('insufficient amount');
+      return setWalletError('insufficient amount');
     }
     const data = {
       show: showDetail,
@@ -229,7 +220,9 @@ const SeatcharterUserView = () => {
       handleApprove(orderId, populatedShow, showDetail, newAmount, seatNameArray);
     }
   }, [orderId]);
-  return (
+  return preloader ? (
+    <Loading />
+  ) : (
     <div>
       <Navbar />
       <div className="flex flex-col justify-center mt-10 ">

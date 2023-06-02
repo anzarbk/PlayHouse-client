@@ -8,10 +8,12 @@ import Footer from '../../components/User-UI/Footer';
 import { useSelector } from 'react-redux';
 import { getSpecificTheatre } from '../../APIs/Theatre';
 import Booking from '../../components/User-UI/Booking';
+import Loading from '../../components/Others/Loading';
 
 const SelectedMovie = () => {
   const ref = useRef(null);
   const currentUserToken = useSelector((state) => state?.token?.data);
+  const [preloader, setPreloader] = useState(false);
   const [genre, setGenre] = useState([]);
   const [lang, setLang] = useState([]);
   const [movie, setMovie] = useState([]);
@@ -23,11 +25,13 @@ const SelectedMovie = () => {
   const [query] = useSearchParams();
 
   const showTheatreMovies = async () => {
+    setPreloader(true);
     ref.current?.scrollIntoView({ behavior: 'smooth' });
     // console.log(movieId, currentUserToken)
     const theatres = await getSpecificTheatre(movieId, currentUserToken);
     console.log(theatres);
     setTheatre(theatres.shows);
+    setPreloader(false);
   };
 
   useEffect(() => {
@@ -46,15 +50,17 @@ const SelectedMovie = () => {
     }
     getMovie();
   }, []);
-  return (
+  return preloader ? (
+    <Loading />
+  ) : (
     <div>
       <Navbar />
       {movie && (
         <div className={`flex  h-[450px] justify-center mt-10`}>
           <img src={getImagePath(movie?.backdrop_path)} className="relative w-full  object-cover" />
-          <div className="absolute flex  border-white-400 border-4 m-8 w-fit">
-            <img id="movie-image" src={getImagePath(movie?.poster_path)} alt="" className="h-96 w-fit" />
-            <div className="max-w-xs h-96  flex flex-col justify-between bg-white dark:bg-gray-800  py-2 px-4">
+          <div className="absolute flex  border-white-400 border-4 m-8 w-fit rounded-md">
+            <img id="movie-image" src={getImagePath(movie?.poster_path)} alt="" className="h-96 w-fit  rounded-md " />
+            <div className="max-w-xs h-96  flex flex-col justify-between bg-white dark:bg-gray-800 rounded-md py-2 px-4">
               <div>
                 <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-3">{movie?.original_title}</h4>
                 <p className="text-gray-800 dark:text-gray-100 text-sm">{movie?.overview}</p>
@@ -72,7 +78,7 @@ const SelectedMovie = () => {
               </div>
             </div>
             {trailer ? (
-              <div className="flex justify-center w-full">
+              <div className="flex justify-center  rounded-md  w-full">
                 {/* {trailer ? playTrailer() : null} */}
                 <Youtube
                   videoId={trailer.key}
