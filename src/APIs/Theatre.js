@@ -470,7 +470,7 @@ export const getTicketListByUserId = async (token) => {
 export const getTicketAPI = async (id, token) => {
   try {
     const { data } = await express({
-      url: `/get-ticket/${id}`,
+      url: `/get-ticket/?id=${id}`,
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + token,
