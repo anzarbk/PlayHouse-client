@@ -42,7 +42,7 @@ export const ProfileImage = () => {
 
   useEffect(() => {
     setImageUrl(currentUserImage);
-  }, []);
+  }, [currentUserImage]);
 
   const handleImageUpload = async (e) => {
     try {

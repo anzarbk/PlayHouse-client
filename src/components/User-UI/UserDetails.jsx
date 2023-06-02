@@ -201,7 +201,7 @@ const UserDetails = () => {
 
   const currentUser = useSelector((state) => state?.user?.data); //##### This function for fetch data from redux
   const getUserFromRedux = () => {
-    console.log(currentUser.userName);
+    console.log(currentUser?.userName);
     setUserName(currentUser?.userName || '');
     setEmail(currentUser?.email || '');
     setFirstName(currentUser?.firstName || '');
@@ -219,7 +219,7 @@ const UserDetails = () => {
   //#########  UseEffect for getting use data from redux when component renders
   useEffect(() => {
     getUserFromRedux();
-  }, []);
+  }, [currentUser]);
 
   //##########  UseEffect for getting states data from API when component renders
   useEffect(() => {

@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
       }
     };
     role();
-  }, []);
+  }, [currentRole]);
   return (
     <div className="">
       <div>

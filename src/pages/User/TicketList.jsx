@@ -17,7 +17,6 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [createData('Frozen yoghurt', 159, 6.0, 24, 4.0), createData('Ice cream sandwich', 237, 9.0, 37, 4.3), createData('Eclair', 262, 16.0, 24, 6.0), createData('Cupcake', 305, 3.7, 67, 4.3), createData('Gingerbread', 356, 16.0, 49, 3.9)];
 const TicketList = () => {
   const currentUserToken = useSelector((state) => state?.token?.data);
   const navigate = useNavigate();
@@ -33,7 +32,10 @@ const TicketList = () => {
   useEffect(() => {
     invoke();
   }, []);
-  const getTicket = (id) => {};
+  const getTicket = (id) => {
+    console.log(id);
+    navigate(`/ticket/${id}`);
+  };
   return (
     <div>
       <Navbar />
@@ -70,7 +72,13 @@ const TicketList = () => {
                     <TableCell align="center">{ticket?.newAmount}</TableCell>
                     <TableCell align="center">
                       <div className="  text-center sm:px-6">
-                        <button type="submit" onClick={navigate('/ticket', { state: ticket?._id })} className="inline-flex justify-center rounded-md bg-blue-900 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                        <button
+                          type="submit"
+                          onClick={() => {
+                            getTicket(ticket?._id);
+                          }}
+                          className="inline-flex justify-center rounded-md bg-blue-900 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                        >
                           view
                         </button>
                       </div>

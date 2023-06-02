@@ -38,3 +38,12 @@ export const googleAPI = async (dataV) => {
     throw err;
   }
 };
+export const refreshUserAPI = async (token) => {
+  try {
+    const { data } = await express.post('auth/refresh', token);
+    if (data?.status === 'success') return data;
+    throw new Error(data?.message || 'Something went wrong !');
+  } catch (err) {
+    throw err;
+  }
+};

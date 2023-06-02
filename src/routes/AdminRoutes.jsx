@@ -4,7 +4,6 @@ import Login from '../pages/admin/Login';
 import Dashboard from '../pages/admin/Dashboard';
 import Theatre from '../pages/admin/Theatre';
 import User from '../pages/admin/User';
-import LineChartsAdmin from '../components/Admin-UI/LineChartsAdmin';
 
 const AdminRoutes = () => {
   return (
@@ -13,7 +12,6 @@ const AdminRoutes = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/user" element={<User />} />
       <Route path="/theatre" element={<Theatre />} />
-      <Route path="/line-chart-admin" element={<LineChartsAdmin />} />
     </Routes>
   );
 };

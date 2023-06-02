@@ -28,9 +28,9 @@ const Navbar = () => {
             <Logo />
           </Link>
 
-          <Search />
+          {/* <Search /> */}
           <Stack direction="row">
-            <Location sx={{ fontSize: 'small' }} />
+            {/* <Location sx={{ fontSize: 'small' }} /> */}
             <Account />
           </Stack>
         </div>

@@ -103,8 +103,8 @@ const Signup = ({ setCurrentPage, handleClose }) => {
       dispatch(userDataActions.setUser(data?.user));
       dispatch(tokenActions.setToken(data?.token));
       localStorage.setItem('usertoken', data?.token);
-      // dispatch(authActions.login());
       dispatch(roleDataActions.setRole(data?.user?.role));
+      // dispatch(authActions.login());
       //  show notification
       // close modal
       handleClose();

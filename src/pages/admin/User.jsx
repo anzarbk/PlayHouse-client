@@ -40,7 +40,7 @@ function User() {
         <div className="sm:px-6 w-[83vw] ml-[13rem]">
           <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
             <div className="sm:flex items-center justify-center">
-              <button onclick="popuphandler(true)" className="mt-4 sm:mt-0 inline-flex items-start justify-end px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+              <button className="mt-4 sm:mt-0 inline-flex items-start justify-end px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
                 <p className="text-sm font-medium leading-none text-white">Users</p>
               </button>
             </div>

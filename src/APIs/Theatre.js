@@ -467,3 +467,34 @@ export const getTicketListByUserId = async (token) => {
     throw err;
   }
 };
+export const getTicketAPI = async (id, token) => {
+  try {
+    const { data } = await express({
+      url: `/get-ticket/${id}`,
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    if (data?.status === 'success') return data;
+    throw new Error('Something went wrong !');
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const adminChartDataAPI = async (token) => {
+  try {
+    const { data } = await express({
+      url: `/admin/get-admin-chart`,
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    if (data?.status === 'success') return data;
+    throw new Error('Something went wrong !');
+  } catch (err) {
+    throw err;
+  }
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import io from 'socket.io-client';
 const socket = io.connect('http://localhost:3000');
@@ -26,8 +26,30 @@ import SeatcharterView from './pages/Theatre/SeatcharterView';
 import SeatcharterUserView from './pages/User/SeatcharterUserView';
 import Ticket from './pages/User/Ticket';
 import TicketList from './pages/User/TicketList';
+import { refreshUserAPI } from './APIs/Auth';
+import { useDispatch } from 'react-redux';
+import { userDataActions } from './redux/userSlice';
+import { tokenActions } from './redux/tokenSlice';
+import { roleDataActions } from './redux/roleSlice';
+import { authActions } from './redux/authSlice';
 
 function App() {
+  const dispatch = useDispatch();
+  const auth = async () => {
+    const accessToken = localStorage.getItem('usertoken');
+    console.log(accessToken);
+    const data = await refreshUserAPI({ accessToken });
+    console.log(data);
+    if (data.status) {
+      dispatch(userDataActions.setUser(data?.user));
+      dispatch(tokenActions.setToken(data?.token));
+      dispatch(authActions.login());
+      dispatch(roleDataActions.setRole(data?.user?.role));
+    }
+  };
+  useEffect(() => {
+    auth();
+  }, []);
   return (
     <Router>
       <Routes>
@@ -38,7 +60,7 @@ function App() {
         <Route path="/seatcharter" element={<SeatCharter />} />
         <Route path="/seatcharter-view" element={<SeatcharterView />} />
         <Route path="/seatcharter-user-view" element={<SeatcharterUserView />} />
-        <Route path="/ticket" element={<Ticket />} />
+        <Route path="/ticket/:id" element={<Ticket />} />
         <Route path="/ticket-list" element={<TicketList />} />
         <Route path="/show-time" element={<ShowTime />} />
         <Route path="/dashboard" element={<Dashboard />} />
