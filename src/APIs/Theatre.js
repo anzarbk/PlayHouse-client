@@ -467,6 +467,21 @@ export const getTicketListByUserId = async (token) => {
     throw err;
   }
 };
+export const TicketOfThisTheatre = async (token) => {
+  try {
+    const { data } = await express({
+      url: `/get-tickets-theatre`,
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    if (data?.status === 'success') return data;
+    throw new Error('Something went wrong !');
+  } catch (err) {
+    throw err;
+  }
+};
 export const getTicketAPI = async (id, token) => {
   try {
     const { data } = await express({
@@ -487,6 +502,21 @@ export const adminChartDataAPI = async (token) => {
   try {
     const { data } = await express({
       url: `/admin/get-admin-chart`,
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    if (data?.status === 'success') return data;
+    throw new Error('Something went wrong !');
+  } catch (err) {
+    throw err;
+  }
+};
+export const TicketForAdmin = async (token) => {
+  try {
+    const { data } = await express({
+      url: `/admin/get-admin-tickets`,
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + token,

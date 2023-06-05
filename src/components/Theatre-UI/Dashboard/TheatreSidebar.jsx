@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const theatreSidebar = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-no-wrap h-screen ">
+    <div className="flex flex-no-wrap h-auto ">
       <div className="w-64 absolute sm:relative bg-gray-800 shadow md:h-full flex-col justify-between hidden sm:flex ">
         <div className="px-8">
           <ul className="mt-20">

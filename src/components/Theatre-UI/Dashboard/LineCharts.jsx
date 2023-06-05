@@ -12,6 +12,7 @@ const LineCharts = () => {
     async function chartData() {
       const chartData = await getChartDataAPI(currentUserToken);
       if (chartData.status) {
+        console.log(chartData);
         setData(chartData?.tickets);
       }
     }
@@ -35,8 +36,8 @@ const LineCharts = () => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="count" stroke="#8884d8" activeDot={{ r: 8 }} />
-        {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
+        <Line type="monotone" dataKey="count" stroke="#000000" activeDot={{ r: 8 }} />
+        {/* <Line type="monotone" dataKey="uv" stroke="#00ff62" /> */}
       </LineChart>
     </ResponsiveContainer>
   );

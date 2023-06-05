@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import io from 'socket.io-client';
-const socket = io.connect('http://localhost:3000');
+// import io from 'socket.io-client';
+// const socket = io.connect('http://localhost:3000');
 import Home from './pages/User/Home';
 import Theatre from './pages/Theatre/Theatre';
 // import Hall from './pages/Others/Hall';
@@ -32,6 +32,8 @@ import { userDataActions } from './redux/userSlice';
 import { tokenActions } from './redux/tokenSlice';
 import { roleDataActions } from './redux/roleSlice';
 import { authActions } from './redux/authSlice';
+import Success from './pages/User/Success';
+import BookingTable from './components/Theatre-UI/Dashboard/BookingTable';
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +64,8 @@ function App() {
         <Route path="/seatcharter-user-view" element={<SeatcharterUserView />} />
         <Route path="/ticket/:id" element={<Ticket />} />
         <Route path="/ticket-list" element={<TicketList />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/Booking-table" element={<BookingTable />} />
         <Route path="/show-time" element={<ShowTime />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/theatre-list" element={<TheatreList />} />

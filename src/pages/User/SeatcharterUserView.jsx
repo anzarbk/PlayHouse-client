@@ -170,7 +170,7 @@ const SeatcharterUserView = () => {
       console.log(ticket.shows);
       setSeatUpdates(true);
       setSucess('Show Booked successfully');
-      navigate('/ticket-list');
+      navigate('/success');
     }
   };
   const { wallet } = useSelector((state) => state?.user?.data); //##### This function for fetch data from redux
@@ -206,7 +206,7 @@ const SeatcharterUserView = () => {
       setSeatUpdates(true);
       setSucess('Show Booked successfully');
       dispatch(userDataActions.setUser(ticket?.user));
-      navigate('/ticket-list');
+      navigate('/success');
     }
   };
   if (error) {

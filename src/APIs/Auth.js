@@ -1,4 +1,4 @@
-import express from '../utils/express'; //axois
+import express from '../utils/express';
 //API for login user
 export const EmailVerificationAPI = async (dataV) => {
   try {

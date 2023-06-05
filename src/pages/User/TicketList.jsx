@@ -13,10 +13,6 @@ import { getTicketListByUserId } from '../../APIs/Theatre';
 import { Button, Empty } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
 const TicketList = () => {
   const currentUserToken = useSelector((state) => state?.token?.data);
   const navigate = useNavigate();

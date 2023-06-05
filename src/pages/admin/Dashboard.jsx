@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/Admin-UI/Sidebar';
 import PieCharts from '../../components/Admin-UI/PieCharts';
+import BookingTableAdmin from '../../components/Admin-UI/BookingTableAdmin';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -18,11 +19,10 @@ function Dashboard() {
               <button className="mt-4 sm:mt-0 inline-flex items-start justify-end px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
                 <p className="text-sm font-medium leading-none text-white">Chart</p>
               </button>
-              {/* <h1>asdasdasdas</h1> */}
             </div>
-            <div className="flex w-screen pt-12 h-[400px] pl-2 gap-2">
+            <div className="flex flex-col w-screen pt-12 h-[400px] pl-2 gap-2">
               <PieCharts />
-              {/* <PieCharts /> */}
+              <BookingTableAdmin />
             </div>
           </div>
         </div>
