@@ -20,9 +20,17 @@ function Dashboard() {
                 <p className="text-sm font-medium leading-none text-white">Chart</p>
               </button>
             </div>
-            <div className="flex flex-col w-screen pt-12 h-[400px] pl-2 gap-2">
+            <div className="flex w-full pt-12 h-[400px] pl-2 gap-2">
               <PieCharts />
-              <BookingTableAdmin />
+            </div>
+
+            <div className="flex flex-col mt-8 items-center justify-center">
+              <button className="mt-4 sm:mt-0 inline-flex items-start justify-end px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+                <p className="text-sm font-medium leading-none text-white">Ticket table</p>
+              </button>
+              <div className="flex justify-center w-full pt-12 h-[550px] pl-2 gap-2">
+                <BookingTableAdmin />
+              </div>
             </div>
           </div>
         </div>

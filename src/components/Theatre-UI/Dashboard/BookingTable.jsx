@@ -6,69 +6,46 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 
-//alert component
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 import { Button, Empty } from 'antd';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { TicketOfThisTheatre, deleteTicketAPI } from '../../../APIs/Theatre';
+import { TicketOfThisTheatre } from '../../../APIs/Theatre';
+import TableRows from './TableRows';
 
 export default function BookingTable() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [dataLength, setDataLength] = useState(0);
-  const lengther = () => {
-    setDataLength(data.length);
-  };
-  const totalPages = Math.ceil(dataLength / itemsPerPage);
+  // const [itemsPerPage, setItemsPerPage] = useState(5);
+  // const [dataLength, setDataLength] = useState(0);
+  // const lengther = () => {
+  //   setDataLength(data.length);
+  // };
+  // const totalPages = Math.ceil(dataLength / itemsPerPage);
   // Slice the data array based on current page and items per page
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  // const indexOfLastItem = currentPage * itemsPerPage;
+  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
   //####################################
 
-  const [open, setOpen] = useState(false);
-  const [sucess, setSucess] = useState(null);
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
   const currentUserToken = useSelector((state) => state?.token?.data);
   useEffect(() => {
     async function invoke() {
-      const tickets = await TicketOfThisTheatre(currentUserToken);
+      console.log(currentPage, currentUserToken);
+      const tickets = await TicketOfThisTheatre(currentPage, currentUserToken);
       if (tickets.status) {
         console.log(tickets);
         setData(tickets.tickets);
       }
     }
     invoke();
-    lengther();
-  }, []);
+    // lengther();
+  }, [currentPage]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-  const deleteTicket = async (ticketId, showId) => {
-    const dataV = {
-      ticketId,
-      showId,
-    };
-    const cancel = await deleteTicketAPI(dataV, currentUserToken);
-    if (cancel.status) {
-      setOpen(true);
-      console.log(cancel);
-      setSucess('ticket cancelled successfully');
-    }
-  };
+
   return (
     <div className="p-4">
       {data ? (
@@ -84,29 +61,8 @@ export default function BookingTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {currentItems.map((ticket) => (
-                <TableRow key={ticket?._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                  <TableCell component="th" scope="row">
-                    {ticket?.movieName}
-                  </TableCell>
-                  <TableCell align="center">{ticket?.movieShowTime}</TableCell>
-                  <TableCell align="center">{ticket?._id}</TableCell>
-                  <TableCell align="center">{ticket?.paymentMethod}</TableCell>
-                  <TableCell align="center">{ticket?.newAmount}</TableCell>
-                  <TableCell align="center">
-                    <div className="  text-center sm:px-6">
-                      <button
-                        type="submit"
-                        onClick={() => {
-                          deleteTicket(ticket?._id, ticket?.movieShowId);
-                        }}
-                        className="inline-flex justify-center rounded-md bg-red-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
-                      >
-                        cancel
-                      </button>
-                    </div>
-                  </TableCell>
-                </TableRow>
+              {data.map((ticket) => (
+                <TableRows key={ticket._id} ticket={ticket} />
               ))}
             </TableBody>
           </Table>
@@ -114,7 +70,11 @@ export default function BookingTable() {
             <button className="text-xs w-fit px-2 border cursor-pointer bg-sky-700 rounded-md py-1" disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>
               Prev
             </button>
-            <button className="text-xs w-fit px-2 border cursor-pointer bg-sky-700 rounded-md py-1" disabled={currentPage === totalPages} onClick={() => handlePageChange(currentPage + 1)}>
+            <button
+              className="text-xs w-fit px-2 border cursor-pointer bg-sky-700 rounded-md py-1"
+              // disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
               Next
             </button>
           </div>
@@ -134,11 +94,6 @@ export default function BookingTable() {
           </Button>
         </Empty>
       )}
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="cancel" sx={{ width: '100%' }}>
-          {sucess}
-        </Alert>
-      </Snackbar>
     </div>
   );
 }

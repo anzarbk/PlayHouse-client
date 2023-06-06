@@ -467,10 +467,10 @@ export const getTicketListByUserId = async (token) => {
     throw err;
   }
 };
-export const TicketOfThisTheatre = async (token) => {
+export const TicketOfThisTheatre = async (id, token) => {
   try {
     const { data } = await express({
-      url: `/get-tickets-theatre`,
+      url: `/get-tickets-theatre/${id}`,
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + token,
@@ -485,7 +485,7 @@ export const TicketOfThisTheatre = async (token) => {
 export const getTicketAPI = async (id, token) => {
   try {
     const { data } = await express({
-      url: `/get-ticket/?id=${id}`,
+      url: `/get-ticket?id=${id}`,
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + token,

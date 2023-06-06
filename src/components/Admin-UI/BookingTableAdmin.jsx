@@ -6,13 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 
-//alert component
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 import { Button, Empty } from 'antd';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -34,14 +28,6 @@ export default function BookingTableAdmin() {
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
   //####################################
 
-  const [open, setOpen] = useState(false);
-  const [sucess, setSucess] = useState(null);
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
   const currentUserToken = useSelector((state) => state?.token?.data);
   useEffect(() => {
     async function invoke() {
@@ -59,19 +45,32 @@ export default function BookingTableAdmin() {
     setCurrentPage(page);
   };
   const deleteTicket = async (ticketId, showId) => {
-    const dataV = {
-      ticketId,
-      showId,
-    };
-    const cancel = await deleteTicketAPI(dataV, currentUserToken);
-    if (cancel.status) {
-      setOpen(true);
-      console.log(cancel);
-      setSucess('ticket cancelled successfully');
-    }
+    console.log(ticketId, showId);
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const dataV = {
+          ticketId,
+          showId,
+        };
+        const cancel = await deleteTicketAPI(dataV, currentUserToken);
+        if (cancel.status) {
+          console.log(cancel);
+        }
+        Swal.fire('Saved!', '', 'success');
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info');
+      }
+    });
   };
   return (
-    <div className="p-4">
+    <div className="">
       {data ? (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 550 }} aria-label="simple table">
@@ -135,11 +134,6 @@ export default function BookingTableAdmin() {
           </Button>
         </Empty>
       )}
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="cancel" sx={{ width: '100%' }}>
-          {sucess}
-        </Alert>
-      </Snackbar>
     </div>
   );
 }

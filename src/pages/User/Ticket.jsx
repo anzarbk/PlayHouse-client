@@ -38,6 +38,7 @@ const Ticket = () => {
 
   useEffect(() => {
     async function invoke() {
+      console.log('machuuu', id, currentUserToken);
       const dbTicket = await getTicketAPI(id, currentUserToken);
       if (dbTicket.status) {
         console.log(dbTicket.ticket);
