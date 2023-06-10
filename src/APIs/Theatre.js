@@ -513,10 +513,10 @@ export const adminChartDataAPI = async (token) => {
     throw err;
   }
 };
-export const TicketForAdmin = async (token) => {
+export const TicketForAdmin = async (id, token) => {
   try {
     const { data } = await express({
-      url: `/admin/get-admin-tickets`,
+      url: `/admin/get-admin-tickets/${id}`,
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + token,

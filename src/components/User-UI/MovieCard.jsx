@@ -12,18 +12,14 @@ import { movieFromDb } from '../../APIs/Theatre';
 const MovieCard = () => {
   const currentUserToken = useSelector((state) => state?.token?.data);
   const [movie, setMovie] = useState([]);
-  // const [movieSelect, setMovieSelect] = useState('');
   const navigate = useNavigate();
   const selectMovie = (id) => {
-    // setMovieSelect(id);
     navigate(`/movies/selected?id=${id}`);
   };
 
   useEffect(() => {
     async function getMovies() {
-      // const movies = await tmdbAllMovies(1);
       const movies = await movieFromDb(currentUserToken);
-      // console.log(movies.data.results);
 
       setMovie(movies.movies);
     }

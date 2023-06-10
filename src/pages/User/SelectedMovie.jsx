@@ -27,9 +27,7 @@ const SelectedMovie = () => {
   const showTheatreMovies = async () => {
     setPreloader(true);
     ref.current?.scrollIntoView({ behavior: 'smooth' });
-    // console.log(movieId, currentUserToken)
     const theatres = await getSpecificTheatre(movieId, currentUserToken);
-    console.log(theatres);
     setTheatre(theatres.shows);
     setPreloader(false);
   };
@@ -37,15 +35,12 @@ const SelectedMovie = () => {
   useEffect(() => {
     async function getMovie() {
       const id = query.get('id');
-      console.log(id);
       const { data } = await tmdbMovieTrailerById(id);
-      // console.log(data);
       setMovieId(id);
       setGenre(data.genres);
       setLang(data.spoken_languages);
       setMovie(data);
       const trailer = data.videos.results.find((el) => el.name === 'Official Trailer');
-      // console.log(trailer);
       setTrailer(trailer);
     }
     getMovie();
@@ -79,7 +74,6 @@ const SelectedMovie = () => {
             </div>
             {trailer ? (
               <div className="flex justify-center  rounded-md  w-full">
-                {/* {trailer ? playTrailer() : null} */}
                 <Youtube
                   videoId={trailer.key}
                   className="w-full"

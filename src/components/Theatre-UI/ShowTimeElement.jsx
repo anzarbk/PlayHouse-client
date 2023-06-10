@@ -8,7 +8,6 @@ const ShowTimeElement = ({ el }) => {
   const [deleted, setDeleted] = useState(false);
 
   const deleteShowTime = async (id) => {
-    console.log(id);
     await deleteShowTimeAPI(id, currentUserToken);
     setDeleted(true);
   };

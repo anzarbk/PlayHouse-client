@@ -7,13 +7,11 @@ import TheatreNavbar from '../Theatre-UI/TheatreNavbar';
 const Layout = ({ children }) => {
   const currentRole = useSelector((state) => state?.role?.data); //##### This function for fetch data from redux
   const [userRole, setUserRole] = useState('');
-  console.log(currentRole);
 
   useEffect(() => {
     const role = () => {
       if (currentRole === 'theatre') {
         setUserRole(currentRole);
-        console.log(userRole);
       }
     };
     role();

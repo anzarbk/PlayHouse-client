@@ -17,16 +17,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const ShowTime = () => {
   const currentUserToken = useSelector((state) => state?.token?.data);
-  console.log(currentUserToken);
-  // const [selectedTime, setSelectedTime] = useState(null);
   const [timeError, setTimeError] = useState(false);
-  // setTimeError(start)
   const [showName, setShowName] = useState('');
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [open, setOpen] = React.useState(false);
   const [sucess, setSucess] = useState(null);
-  // const [roleButton, setRoleButton] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -34,32 +30,26 @@ const ShowTime = () => {
     }
     setOpen(false);
   };
-  let timeDifference = '';
 
   const showTimeValidation = (start, end) => {
     if (start && end) {
-      console.log(start, end);
       const minuteInMS = 1000 * 60;
       const hourInMS = minuteInMS * 60;
       const startTime = start.$d.getTime();
       const endTime = end.$d.getTime();
       const hourDiff = (endTime - startTime) / hourInMS;
-      console.log(hourDiff);
       return hourDiff;
     }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(start, end);
     const valid = showTimeValidation(start, end);
-    console.log(valid);
     if (valid >= 4 || valid < 0.5) {
       setTimeError('Please choose time less than 4 hour or greater than half hour !');
       return;
     }
 
     const dataV = { showName, start, end };
-    console.log(dataV);
     const data = await addShowTimeAPI(dataV, currentUserToken);
     if (data.status === 'success') {
       setOpen(true);

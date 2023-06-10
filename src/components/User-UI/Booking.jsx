@@ -18,32 +18,23 @@ const Booking = ({ theatre }) => {
     const day3 = day2 + 1;
     let arr = [];
     arr.push(day1, day2, day3);
-    // console.log(arr);
     setDates(arr);
   };
 
   const getTheatreAndShows = (el) => {
     let arr2 = [];
-    console.log(el);
     for (let i = 0; i < theatre.length; i++) {
       const dateString = theatre[i].Date.toString();
-      console.log(typeof dateString);
       const date = new Date(dateString);
       const day = date.getUTCDate();
-      console.log(day);
       if (el === day) {
         arr2.push(theatre[i]);
       }
     }
-    console.log(arr2);
     setShows(arr2);
   };
   const showSeats = async (show) => {
-    console.log(show);
-    // const seats = await getSeatCharterDataBYNameAPI(show.screen, currentUserToken);
-    // console.log(seats.seat.seatCharter);
     setSeat1(show.screen);
-    console.log(seat1);
     if (seat1) {
       navigate('/seatcharter-user-view', { state: { show } });
     }
@@ -54,7 +45,6 @@ const Booking = ({ theatre }) => {
     const day = todaysDate.getUTCDate();
     getTheatreAndShows(day);
   }, []);
-
   return (
     <div className="py-8 w-full">
       <div className="lg:flex flex-col items-center justify-center w-full">
@@ -72,13 +62,17 @@ const Booking = ({ theatre }) => {
           ))}
         </div>
         {shows &&
+          // console.log(shows) &&
           shows.map((show) => (
             <div key={show._id} className="lg:w-4/12 lg:mr-7 lg:mb-0 mb-7 bg-white p-6 shadow rounded">
               <div className="flex items-center border-b border-gray-200 pb-6">
                 <img src={show.theatre.image} alt className="w-12 h-12 rounded-full" />
                 <div className="flex items-start justify-between w-full">
-                  <div className="pl-3 w-full">
+                  <div className="flex pl-3 w-full gap-2">
                     <p className="text-xl font-medium leading-5 text-gray-800">{show.theatre.name}</p>
+                    <button onClick={() => showSeats(show)} className="py-2 px-4 text-xs leading-3 text-black rounded-full bg-green-100 cursor-pointer">
+                      {show.screen.screenName}
+                    </button>
                   </div>
                   <button onClick={() => showSeats(show)} className="py-2 px-4 text-xs leading-3 text-indigo-700 rounded-full bg-indigo-100 cursor-pointer">
                     {show.show}

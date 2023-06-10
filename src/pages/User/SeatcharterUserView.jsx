@@ -53,17 +53,14 @@ const SeatcharterUserView = () => {
 
   // setSeats(seat1?.)
   const currentUserToken = useSelector((state) => state?.token?.data);
-  const seatBooking = () => {};
+
   useEffect(() => {
     async function invoke() {
       const { show } = location?.state;
-      // setShowDetail(show);
       setPopulatedShow(show);
       setId(show._id);
-      console.log(show);
       const showss = await getShowDataByIdAPI(show._id, currentUserToken);
       if (showss.status) {
-        console.log(showss);
         setShowDetail(showss.show[0]);
       }
       // const seat = show.screen.screenName;
@@ -86,7 +83,6 @@ const SeatcharterUserView = () => {
 
   let arr = [];
   const selectSeat = async (no) => {
-    // console.log(no);
     setSeatError('');
     const seatClone = [...newSeats];
     seatClone.forEach((el) => {
@@ -106,17 +102,13 @@ const SeatcharterUserView = () => {
             if (index > -1) {
               seatNameArray.splice(index, 1);
             }
-            // seatNameArray.pop(el.seatNumber);
           }
-          // setSeatNameArray(seatNameArray);
           setNewAmount((prev) => prev - showDetail.price);
         } else {
           el.isSelected = !el.isSelected;
-          console.log(el);
           if (!seatNameArray.includes(el.seatNumber)) {
             seatNameArray.push(el.seatNumber);
           }
-          // setSeatNameArray(arr);
           setNewAmount((prev) => prev + showDetail.price);
         }
       }
@@ -126,7 +118,6 @@ const SeatcharterUserView = () => {
   };
 
   const RowComp = ({ arr, row }) => {
-    const [isSelected, setIsSelected] = useState(false);
     return (
       <div className="flex justify-center  w-[65vw] my-3 gap-3 ">
         {arr.map((el) => {
@@ -161,20 +152,17 @@ const SeatcharterUserView = () => {
       seatNameArray: seat,
       seats: newSeats,
     };
-    console.log(data);
     const ticket = await createTicketAPI(data, currentUserToken);
     const ticketData = ticket.ticket;
     if (ticket.status) {
       setPaidFor(true);
       setOpen(true);
-      console.log(ticket.shows);
       setSeatUpdates(true);
       setSucess('Show Booked successfully');
       navigate('/success');
     }
   };
   const { wallet } = useSelector((state) => state?.user?.data); //##### This function for fetch data from redux
-  console.log(wallet);
 
   const payWithWallet = () => {
     setOrderId(populatedShow._id);
@@ -196,11 +184,9 @@ const SeatcharterUserView = () => {
       seatNameArray: seat,
       seats: newSeats,
     };
-    console.log(data);
     const ticket = await createTicketAPI(data, currentUserToken);
     const ticketData = ticket.ticket;
     if (ticket.status) {
-      console.log(ticket);
       setPaidFor(true);
       setOpen(true);
       setSeatUpdates(true);
@@ -239,12 +225,7 @@ const SeatcharterUserView = () => {
             <p className="flex justify-center font-extrabold text-red-500"></p>
           )}
           <div className="flex flex-col  gap-4 w-auto items-center">
-            {/* <PayPalScriptProvider options={initialOptions}> 
-            //####################
-            {/* <PayPalScriptProvider options={{ 'client-id': import.meta.env.VITE_PAYPAL_CLIENT_ID }}>
-              <PayPalButtons style={{ layout: 'horizontal' }} />
-            </PayPalScriptProvider> 
-          //##################*/}
+
             <div className="px-2 py-2 bg-slate-300 rounded-md">
               <div className=" flex flex-col sm:flex-row rounded-md xl:flex-col justify-between items-center bg-gray-100  sm:py-0  px-2 w-96">
                 <div className="flex flex-col justify-between  w-full space-y-2">
@@ -276,15 +257,7 @@ const SeatcharterUserView = () => {
                     tagline: false,
                     shape: 'pill',
                   }}
-                  // onClick={(data, actions) => {
-                  //   const hasAlreadyBoughtTicket = false;
-                  //   if (hasAlreadyBoughtTicket) {
-                  //     setError('you already buy');
-                  //     return actions.reject();
-                  //   } else {
-                  //     return actions.resolve();
-                  //   }
-                  // }}
+
                   createOrder={(data, actions) => {
                     return actions.order.create({
                       purchase_units: [
@@ -306,7 +279,7 @@ const SeatcharterUserView = () => {
                     console.log(err);
                   }}
                   onCancel={() => {
-                    //cancel message
+
                   }}
                 />
               </PayPalScriptProvider>

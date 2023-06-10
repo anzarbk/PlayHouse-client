@@ -21,30 +21,12 @@ const standup = [
 ];
 
 const StandUpCard = () => {
-  //   const [movie, setMovie] = useState([]);
-  useEffect(() => {
-    // async function getMovies() {
-    //   //   const movies = await tmdbMovies(API);
-    //   //   console.log(movies.data.results);
-    //   //   setMovie(movies.data.results);
-    // }
-    // getMovies();
-  }, []);
+
+
   return (
     <div className="flex flex-wrap gap-4 w-full justify-center">
       {standup.map((mov, index) => (
         <Card index={index} sx={{ maxWidth: 200, height: 300 }}>
-          {/* <CardActionArea>
-            <CardMedia component="img" height="270" image={mov.std} />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Lizard
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica
-              </Typography>
-            </CardContent>
-          </CardActionArea> */}
           <AuthModal3 mov={mov} index={index} key={index} />
         </Card>
       ))}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { uploadImage } from '../../utils/firebase';
 import { Progress } from '../profile/progress';
-// import { movieImagesEditAPI } from '../../api/theatre';
 import { useSelector } from 'react-redux';
 
 const MovieImage = ({ imageUrl, setImageUrl, bannerUrl, setBannerUrl }) => {
@@ -45,7 +44,6 @@ const MovieImage = ({ imageUrl, setImageUrl, bannerUrl, setBannerUrl }) => {
         setLoading(false);
       }
     } catch (error) {
-      alert(error?.message);
     }
   };
 

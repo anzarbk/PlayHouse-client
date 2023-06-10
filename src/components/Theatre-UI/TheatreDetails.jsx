@@ -32,7 +32,6 @@ export const TheatreDetails = () => {
   const getTheatreFromServer = async () => {
     const theatre = await getTheatreDataAPI(currentUserId, currentUserToken);
     if (theatre.status === 'success') {
-      console.log(theatre);
       setTheatreName(theatre?.theatre[0].name || '');
       setLocation(theatre?.theatre[0].location || '');
       setFacilities(theatre?.theatre[0].facilities || '');
@@ -154,7 +153,6 @@ export const TheatreDetails = () => {
     if (!dataV || !currentUserToken) return;
     if (currentUserRole === 'theatre') {
       const data = await theatreEditAPI(dataV, currentUserToken);
-      console.log('edit hteatre');
       if (data.status === 'success') {
         setOpen(true);
         setSucess('Theatre Updated successfully');

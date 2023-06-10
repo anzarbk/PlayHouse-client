@@ -28,7 +28,6 @@ const ShowsList = () => {
   useEffect(() => {
     const getShow = async () => {
       const show = await getShowDataAPI(currentUserToken);
-      console.log(show);
       if (show.status) {
         setShow(show.show);
       }

@@ -19,7 +19,6 @@ export const ProfileImage = () => {
   //###################### Snakbar
   const [open, setOpen] = React.useState(false);
   const [sucess, setSucess] = useState(null);
-  // const [roleButton, setRoleButton] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -28,9 +27,6 @@ export const ProfileImage = () => {
     setOpen(false);
   };
 
-  // console.log(roleButton);
-
-  // const [val, setVal] = useState(false);
   const navigate = useNavigate();
   //######################  UseState for handling profile Image of the user
   const [save, setSave] = useState(false);
@@ -56,7 +52,6 @@ export const ProfileImage = () => {
       setSave(true);
     } catch (e) {
       setLoading(false);
-      console.log(e);
     }
   };
 
@@ -68,23 +63,12 @@ export const ProfileImage = () => {
       setOpen(true);
       setSucess('Image Updated successfully');
       dispatch(userDataActions.setUser(data?.user));
-    } catch (error) {
-      console.log(error);
-      alert(error?.message);
-    }
+    } catch (error) {}
   };
 
   const theatreRole = () => {
     navigate('/theatre');
   };
-
-  // const hallRole = () => {
-  //   navigate('/hall');
-  // };
-
-  // const concertRole = () => {
-  //   navigate('/concert');
-  // };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -103,48 +87,24 @@ export const ProfileImage = () => {
               )}
 
               {imageUrl && <img src={imageUrl} alt="profile-image" />}
-              {/* <button type="button" className="ml-5 rounded-md border border-gray-300 bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50">
-                Change
-              </button> */}
             </div>
           </div>
-          <input
-            type="file"
-            onChange={
-              handleImageUpload
-              // (event) => {
-              //   setImageUpload(event.target.files[0]);
-              // }
-            }
-            accept="image/*"
-            className="w-11/12 h-10 rounded-md border border-gray-300 bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50"
-          />
+          <input type="file" onChange={handleImageUpload} accept="image/*" className="w-11/12 h-10 rounded-md border border-gray-300 bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50" />
         </div>
 
         <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
-          {/* <Button variant="contained" sx={{ backgroundColor: 'darkblue' }} disabled={false}>
-            Save
-          </Button> */}
           {save && (
             <button type="submit" className="inline-flex justify-center rounded-md bg-blue-900 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
               Save
             </button>
           )}
         </div>
-        {/* {roleButton === 'true' ? setVal(true) : setVal(false)}
-        {val && ( */}
+
         <div className="">
           <button onClick={theatreRole} className="w-11/12 inline-flex justify-center rounded-md bg-blue-900 py-2 m-3  text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
             Switch to Theatre role
           </button>
-          {/* <button onClick={hallRole} className="w-11/12 inline-flex justify-center rounded-md bg-blue-900 py-2  m-3  text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-            Switch to Hall role
-          </button>
-          <button onClick={concertRole} className="w-11/12 inline-flex justify-center rounded-md bg-blue-900 py-2  m-3  text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-            Switch to concert role
-          </button> */}
         </div>
-        {/* )} */}
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>

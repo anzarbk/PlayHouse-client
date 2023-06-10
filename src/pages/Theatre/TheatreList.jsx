@@ -15,7 +15,6 @@ const TheatreList = () => {
   useEffect(() => {
     const getTheatre = async () => {
       const theatre = await getTheatreDataAPI(currentUser, currentUserToken);
-      console.log(theatre);
       if (theatre.status) {
         const data = theatre.theatre;
         setTheatre(data);
@@ -23,7 +22,6 @@ const TheatreList = () => {
     };
     getTheatre();
   }, []);
-  console.log(theatre);
   const navigate = useNavigate();
   return (
     <Layout>

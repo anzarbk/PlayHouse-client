@@ -5,15 +5,15 @@ import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { firebaseAuth } from '../../utils/firebase';
-// import { FirebaseError } from 'firebase/app';
+
 import { useDispatch } from 'react-redux';
 import { userDataActions } from '../../redux/userSlice';
 import { tokenActions } from '../../redux/tokenSlice';
-// import { authActions } from '../../redux/authSlice';
+
 import { roleDataActions } from '../../redux/roleSlice';
-// import { sendEmail } from '../../utils/mailer';
+
 import { EmailVerificationAPI, googleAPI } from '../../APIs/Auth';
-// import { theatreDataActions } from '../../redux/theatreSlice';
+
 
 const SignupEmail = ({ setCurrentPage, handleClose }) => {
   //use form hook;
@@ -144,15 +144,8 @@ const SignupEmail = ({ setCurrentPage, handleClose }) => {
                 },
               })}
             />
-            {/* {errors?.email && <span className="text-sm text-[#ff0000]">{errors.email.message}</span>} */}
-            {/* {errorMessage && <span className="text-sm text-[#ff0000]">{errorMessage}</span>} */}
           </div>
-          {/* <div className="mt-8">
-            <button type="submit" className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">
-              verify
-            </button>
-            <div id="sign-in-button"></div>
-          </div> */}
+
 
           <div className="mt-6  w-full">
             <label className="text-sm font-medium leading-none text-gray-800">Mobile number</label>
@@ -174,7 +167,6 @@ const SignupEmail = ({ setCurrentPage, handleClose }) => {
                   },
                 })}
               />
-              {/* {errors?.phone && <span className="text-sm text-[#ff0000]">{errors.phone.message}</span>} */}
               <div className="absolute right-0 mt-2 mr-3 cursor-pointer"></div>
             </div>
           </div>

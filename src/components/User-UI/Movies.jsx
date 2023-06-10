@@ -9,18 +9,16 @@ const Movies = () => {
   const currentUserToken = useSelector((state) => state?.token?.data);
 
   const [movie, setMovie] = useState([]);
-  // const [selectedMovie, setSelectedMovie] = useState();
-  // const [movieSelect, setMovieSelect] = useState('');
+
 
   const navigate = useNavigate();
   const selectMovie = (id) => {
-    // setMovieSelect(id);
+
     navigate(`/movies/selected?id=${id}`);
   };
   useEffect(() => {
     async function getMovies() {
-      // const movies = await tmdbAllMovies(1);
-      // console.log(movies.data.results);
+
       const movies = await movieFromDb(currentUserToken);
 
       setMovie(movies.movies);

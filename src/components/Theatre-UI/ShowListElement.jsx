@@ -7,7 +7,6 @@ function ShowListElement({ el }) {
   const currentUserToken = useSelector((state) => state?.token?.data);
   const [deleted, setDeleted] = useState(false);
   const deleteShow = async (id) => {
-    console.log(id);
     try {
       await deleteShowAPI(id, currentUserToken);
       setDeleted(true);
@@ -45,7 +44,6 @@ function ShowListElement({ el }) {
         <td className="pl-5">
           <button
             className="py-3 px-3 text-sm focus:outline-none leading-none text-green-500 bg-green-100 hover:bg-green-200 rounded"
-            // onClick={(e) => blockUser(el._id)}
           >
             {el.screen}
           </button>

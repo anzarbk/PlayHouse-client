@@ -23,7 +23,6 @@ const Login = ({ setCurrentPage, handleClose }) => {
   const dispatch = useDispatch();
 
   const atSubmit = async (input) => {
-    console.log(input, 'input');
     try {
       const { email, password } = input;
       const userCred = await signInWithEmailAndPassword(firebaseAuth, email, password);
@@ -69,7 +68,6 @@ const Login = ({ setCurrentPage, handleClose }) => {
       handleClose();
     } catch (error) {
       setErrorMessage(error?.message || 'Something went wrong !');
-      console.log(error);
     }
   };
 
@@ -80,9 +78,7 @@ const Login = ({ setCurrentPage, handleClose }) => {
     } catch (error) {}
   };
 
-  // const authentication = () => {
-  //   setAuth(true);
-  // };
+
 
   return (
     <div className="bg-white  rounded w-fit px-10 m-10">

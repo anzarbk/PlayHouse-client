@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getImagePath } from '../../utils/tmdb';
-import { Document, Page } from 'react-pdf';
 import Navbar from '../../components/User-UI/Navbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { userDataActions } from '../../redux/userSlice';
@@ -29,16 +28,12 @@ const Ticket = () => {
     setOpen(false);
   };
   const [ticket, setTicket] = useState();
-  const [ID, setID] = useState();
-  const [datas, setDatas] = useState();
-  const [img, setImg] = useState();
   const [ticketId, setTicketId] = useState();
   const [movieImage, setMovieImage] = useState();
   const [showId, setShowId] = useState();
 
   useEffect(() => {
     async function invoke() {
-      console.log('machuuu', id, currentUserToken);
       const dbTicket = await getTicketAPI(id, currentUserToken);
       if (dbTicket.status) {
         console.log(dbTicket.ticket);
@@ -49,13 +44,10 @@ const Ticket = () => {
       }
     }
     invoke();
-    // setTickets(populatedShow);
-    // setImg(getImagePath(populatedShow?.movie?.poster_path));
-    // setDatas(ticketData);
+
   }, [id]);
   const currentUserToken = useSelector((state) => state?.token?.data);
   const cancelTicket = async () => {
-    console.log(id);
     const dataV = {
       ticketId,
       showId,
@@ -63,7 +55,6 @@ const Ticket = () => {
     const cancel = await deleteTicketAPI(dataV, currentUserToken);
     if (cancel.status) {
       setOpen(true);
-      console.log(cancel);
       setSucess('ticket cancelled successfully');
       dispatch(userDataActions.setUser(cancel?.user));
       navigate('/ticket-list');
@@ -91,7 +82,7 @@ const Ticket = () => {
                   {ticket && <p className="text-base font-semibold leading-none text-gray-600">₹{ticket.newAmount}</p>}
                   <p className="text-xl font-semibold leading-none text-gray-600">Ticket ID :{ticket?._id.substring(0, 5)}</p>
                 </div>
-                <div className=" sm:mt-0 py-2 w-52 sm:w-96 xl:w-auto">
+                <div className=" sm:mt-0 py-2 w-52 sm:w-96  ">
                   {' '}
                   <img src={getImagePath(movieImage)} />{' '}
                 </div>
@@ -109,13 +100,6 @@ const Ticket = () => {
             </div>
           </div>
         </div>
-
-        {/* <div>
-          <Document file="somefile.pdf">
-            <Ticket />
-          </Document>
-          <p>Page</p>
-        </div> */}
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="cancel" sx={{ width: '100%' }}>

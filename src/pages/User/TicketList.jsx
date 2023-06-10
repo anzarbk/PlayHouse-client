@@ -20,7 +20,6 @@ const TicketList = () => {
   const [tickets, setTickets] = useState([]);
   const invoke = async () => {
     const ticketList = await getTicketListByUserId(currentUserToken);
-    console.log(ticketList);
     if (ticketList.status) {
       setTickets(ticketList.tickets);
     }
@@ -29,7 +28,6 @@ const TicketList = () => {
     invoke();
   }, []);
   const getTicket = (id) => {
-    console.log(id);
     navigate(`/ticket/${id}`);
   };
   return (

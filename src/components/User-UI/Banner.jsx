@@ -4,7 +4,7 @@ const Banner = () => {
   return (
     <div className="flex justify-center mt-10  bg-black">
       <img src={Flower} className="w-fit h-96" />
-      {/* <div>coming soon</div> */}
+
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { deleteTicketAPI } from '../../../APIs/Theatre';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import { useSelector } from 'react-redux';
+import { deleteTicketAPI } from '../../APIs/Theatre';
 
-const TableRows = ({ ticket }) => {
+const TableRowsAdmin = ({ ticket }) => {
   const currentUserToken = useSelector((state) => state?.token?.data);
 
   const [del, setDel] = useState(false);
@@ -17,7 +17,6 @@ const TableRows = ({ ticket }) => {
       confirmButtonText: 'Delete',
       denyButtonText: `Don't delete`,
     }).then(async (result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         const dataV = {
           ticketId,
@@ -63,4 +62,4 @@ const TableRows = ({ ticket }) => {
   );
 };
 
-export default TableRows;
+export default TableRowsAdmin;

@@ -41,7 +41,3 @@ function Dashboard() {
 
 export default Dashboard;
 
-// <div className="flex w-screen">
-//   <Sidebar />
-//   <LineChartAdmin />
-// </div>

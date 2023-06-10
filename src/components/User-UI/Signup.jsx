@@ -11,9 +11,7 @@ import { userDataActions } from '../../redux/userSlice';
 import { tokenActions } from '../../redux/tokenSlice';
 import { authActions } from '../../redux/authSlice';
 import { roleDataActions } from '../../redux/roleSlice';
-// import { sendEmail } from '../../utils/mailer';
 import { EmailVerificationAPI, googleAPI, signUpAPI } from '../../APIs/Auth';
-// import { theatreDataActions } from '../../redux/theatreSlice';
 
 const Signup = ({ setCurrentPage, handleClose }) => {
   //use form hook;
@@ -43,12 +41,7 @@ const Signup = ({ setCurrentPage, handleClose }) => {
   const atSubmit = async (input) => {
     try {
       const { email, password, name } = input;
-      console.log(email);
       if (!email || !password) throw new Error('Missing password or email !');
-      // const nodemailer = await EmailVerificationAPI(email);
-      // const conformation = sendEmail(email);
-      // console.log(conformation);
-      // if (nodemailer.status) {
       const userCred = await createUserWithEmailAndPassword(firebaseAuth, email, password);
       const { user } = userCred;
       const toServer = { email, password, name, accessToken: await user.getIdToken() };
@@ -113,44 +106,7 @@ const Signup = ({ setCurrentPage, handleClose }) => {
     }
   };
 
-  //
-  // const generateReacptcha = () => {
-  //   window.recaptchaVerifier = new RecaptchaVerifier(
-  //     'sign-in-button',
-  //     {
-  //       size: 'invisible',
-  //       callback: (response) => {},
-  //     },
-  //     firebaseAuth
-  //   );
-  // };
 
-  // Send OTP to mobile
-  // const sendOtp = (num) => {
-  //   try {
-  //     generateReacptcha();
-  //     const phoneNum = `+91${num}`;
-  //     const appVerifier = window.recaptchaVerifier;
-  //     signInWithPhoneNumber(firebaseAuth, phoneNum, appVerifier).then((res) => {
-  //       window.confirmationResult = res;
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // Handle 'Verify OTP' button click
-  // const handleVerifyButton = async (event) => {
-  //   try {
-  //     let confirmationResult = window.confirmationResult;
-  //     const confObj = await confirmationResult?.confirm(/* OTP */);
-  //     if (confObj?.user) {
-  //       console.log('Verified');
-  //     }
-  //   } catch (err) {
-  //     console.log(err?.message);
-  //   }
-  // };
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -243,12 +199,7 @@ const Signup = ({ setCurrentPage, handleClose }) => {
             {errors?.email && <span className="text-sm text-[#ff0000]">{errors.email.message}</span>}
             {errorMessage && <span className="text-sm text-[#ff0000]">{errorMessage}</span>}
           </div>
-          {/* <div className="mt-8">
-            <button type="submit" className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">
-              verify
-            </button>
-            <div id="sign-in-button"></div>
-          </div> */}
+
           <div className="mt-6  w-full">
             <label className="text-sm font-medium leading-none text-gray-800">Password</label>
             <div className="relative  items-center justify-center">
@@ -302,30 +253,7 @@ const Signup = ({ setCurrentPage, handleClose }) => {
               <div className="absolute right-0 mt-2 mr-3 cursor-pointer"></div>
             </div>
           </div>
-          {/* <div className="mt-6  w-full">
-            <label className="text-sm font-medium leading-none text-gray-800">Mobile number</label>
-            <div className="relative items-center justify-center">
-              <input
-                aria-label="enter Password"
-                role="input"
-                type="text"
-                className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
-                {...register('phone', {
-                  required: 'required',
-                  minLength: {
-                    value: 10,
-                    message: 'Mobile number length should be at least 10 numbers',
-                  },
-                  maxLength: {
-                    value: 13,
-                    message: 'Mobile number cannot exceed more than 13 numbers',
-                  },
-                })}
-              />
-              {errors?.phone && <span className="text-sm text-[#ff0000]">{errors.phone.message}</span>}
-              <div className="absolute right-0 mt-2 mr-3 cursor-pointer"></div>
-            </div>
-          </div> */}
+
           <div className="mt-8">
             <button type="submit" className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">
               Register

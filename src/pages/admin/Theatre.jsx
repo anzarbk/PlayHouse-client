@@ -12,16 +12,13 @@ function Theatre() {
   const getAlltheatre = async () => {
     const data = await getAlltheatreAPI(currentUserToken);
     if (data.status === 'success') {
-      console.log(data.theatre);
       setTheatre(data.theatre);
     }
   };
 
   const blockTheatre = async (e) => {
-    console.log(e);
     const data = await getUniqueTheatreAPI(e, currentUserToken);
     if (data.status === 'success') {
-      console.log(data.newTheatre);
       setRefresh(!refresh);
     }
   };

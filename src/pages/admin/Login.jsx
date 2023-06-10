@@ -29,15 +29,11 @@ function Login() {
   };
 
   const atSubmit = async (input) => {
-    console.log(input, 'input');
     try {
       const { email, password } = input;
-      console.log(email, password);
       const adminCred = await signInWithEmailAndPassword(firebaseAuth, email, password);
       const { user } = adminCred;
-      console.log(user);
       const toServer = { email, password, accessToken: await user.getIdToken() };
-      console.log(toServer);
       const data = await signinAPI(toServer);
       dispatch(userDataActions.setUser(data?.user));
       dispatch(tokenActions.setToken(data?.token));

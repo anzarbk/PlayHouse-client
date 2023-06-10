@@ -7,11 +7,9 @@ const paypalCheckoutButton = (props) => {
   const [error, setError] = useState(null);
 
   const handleApprove = async (orderId) => {
-    //backend function
-    //success
+
     setPaidFor(true);
-    //navigate to the invoice
-    //if error catch it
+
   };
   if (paidFor) {
     alert('thank you');
@@ -44,7 +42,6 @@ const paypalCheckoutButton = (props) => {
         }}
         onApprove={async (data, actions) => {
           const order = await actions.order.capture();
-          console.log(order);
           handleApprove(data.orderID);
         }}
         onClick={(data, action) => {
@@ -58,7 +55,6 @@ const paypalCheckoutButton = (props) => {
         }}
         onError={(err) => {
           setError(err);
-          console.log(err);
         }}
       />
     </div>

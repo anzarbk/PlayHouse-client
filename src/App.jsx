@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import io from 'socket.io-client';
-// const socket = io.connect('http://localhost:3000');
+
 import Home from './pages/User/Home';
 import Theatre from './pages/Theatre/Theatre';
-// import Hall from './pages/Others/Hall';
-// import Concert from './pages/Others/Concert';
+
 import Profile from './pages/User/Profile';
-// import Movie from './pages/Others/Movie';
+
 import './App.css';
 import MovieShow from './pages/Theatre/MovieShow';
 import Movies from './pages/User/Movies';
@@ -39,9 +37,7 @@ function App() {
   const dispatch = useDispatch();
   const auth = async () => {
     const accessToken = localStorage.getItem('usertoken');
-    console.log(accessToken);
     const data = await refreshUserAPI({ accessToken });
-    console.log(data);
     if (data.status) {
       dispatch(userDataActions.setUser(data?.user));
       dispatch(tokenActions.setToken(data?.token));
@@ -72,9 +68,6 @@ function App() {
         <Route path="/screen-list" element={<ScreenList />} />
         <Route path="/shows-list" element={<ShowsList />} />
         <Route path="/show-time-list" element={<ShowTimeList />} />
-        {/* <Route path="/hall" element={<Hall />} /> */}
-        {/* <Route path="/concert" element={<Concert />} /> */}
-        {/* <Route path="/movie" element={<Movie />} /> */}
         <Route path="/show" element={<MovieShow />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/talkshow" element={<TalkShow />} />

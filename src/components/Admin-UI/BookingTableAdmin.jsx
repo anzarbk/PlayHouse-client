@@ -12,62 +12,29 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { TicketForAdmin, deleteTicketAPI } from '../../APIs/Theatre';
+import TableRowsAdmin from './TableRowsAdmin';
 
 export default function BookingTableAdmin() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [dataLength, setDataLength] = useState(0);
-  const lengther = () => {
-    setDataLength(data.length);
-  };
-  const totalPages = Math.ceil(dataLength / itemsPerPage);
-  // Slice the data array based on current page and items per page
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
   //####################################
 
   const currentUserToken = useSelector((state) => state?.token?.data);
   useEffect(() => {
     async function invoke() {
-      const tickets = await TicketForAdmin(currentUserToken);
+      const tickets = await TicketForAdmin(currentPage, currentUserToken);
       if (tickets.status) {
         console.log(tickets);
         setData(tickets.tickets);
       }
     }
     invoke();
-    lengther();
-  }, []);
+ 
+  }, [currentPage]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-  };
-  const deleteTicket = async (ticketId, showId) => {
-    console.log(ticketId, showId);
-    Swal.fire({
-      title: 'Do you want to save the changes?',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Save',
-      denyButtonText: `Don't save`,
-    }).then(async (result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        const dataV = {
-          ticketId,
-          showId,
-        };
-        const cancel = await deleteTicketAPI(dataV, currentUserToken);
-        if (cancel.status) {
-          console.log(cancel);
-        }
-        Swal.fire('Saved!', '', 'success');
-      } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info');
-      }
-    });
   };
   return (
     <div className="">
@@ -84,29 +51,8 @@ export default function BookingTableAdmin() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {currentItems.map((ticket) => (
-                <TableRow key={ticket?._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                  <TableCell component="th" scope="row">
-                    {ticket?.movieName}
-                  </TableCell>
-                  <TableCell align="center">{ticket?.movieShowTime}</TableCell>
-                  <TableCell align="center">{ticket?._id}</TableCell>
-                  <TableCell align="center">{ticket?.paymentMethod}</TableCell>
-                  <TableCell align="center">{ticket?.newAmount}</TableCell>
-                  <TableCell align="center">
-                    <div className="  text-center sm:px-6">
-                      <button
-                        type="submit"
-                        onClick={() => {
-                          deleteTicket(ticket?._id, ticket?.movieShowId);
-                        }}
-                        className="inline-flex justify-center rounded-md bg-red-700 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
-                      >
-                        cancel
-                      </button>
-                    </div>
-                  </TableCell>
-                </TableRow>
+              {data.map((ticket) => (
+                <TableRowsAdmin key={ticket._id} ticket={ticket} />
               ))}
             </TableBody>
           </Table>
@@ -114,7 +60,11 @@ export default function BookingTableAdmin() {
             <button className="text-xs w-fit px-2 border cursor-pointer bg-sky-700 rounded-md py-1" disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>
               Prev
             </button>
-            <button className="text-xs w-fit px-2 border cursor-pointer bg-sky-700 rounded-md py-1" disabled={currentPage === totalPages} onClick={() => handlePageChange(currentPage + 1)}>
+            <button
+              className="text-xs w-fit px-2 border cursor-pointer bg-sky-700 rounded-md py-1"
+              // disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
               Next
             </button>
           </div>

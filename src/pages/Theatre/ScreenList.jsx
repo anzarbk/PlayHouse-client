@@ -13,11 +13,9 @@ const ScreenList = () => {
   useEffect(() => {
     async function getSeatCharters() {
       const theatre = await getTheatreDataAPI(currentUserId, currentUserToken);
-      console.log(theatre);
       if (theatre.status) {
         const SeatCharter = await getSeatCharterDataAPI(theatre.theatre[0]._id, currentUserToken);
         if (SeatCharter.status) {
-          console.log(SeatCharter);
           setScreen(SeatCharter.seatcharter);
         }
       }

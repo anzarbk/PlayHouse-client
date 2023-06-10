@@ -14,7 +14,6 @@ const TheatreImage = ({ imageUrl, setImageUrl, bannerUrl, setBannerUrl }) => {
   //###################### Snakbar
   const [open, setOpen] = React.useState(false);
   const [sucess, setSucess] = useState(null);
-  // const [roleButton, setRoleButton] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {

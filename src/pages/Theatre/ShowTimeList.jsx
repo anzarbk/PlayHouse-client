@@ -14,7 +14,6 @@ const ShowTimeList = () => {
   useEffect(() => {
     const getshowTime = async () => {
       const showTime = await getShowTimeAPI(currentUserToken);
-      console.log(showTime);
       if (showTime.status) {
         const data = showTime.sTime;
         setShowTime(data);

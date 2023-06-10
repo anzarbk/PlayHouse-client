@@ -12,7 +12,6 @@ function User() {
   const getAllUsers = async () => {
     const data = await getAllUsersAPI(currentUserToken);
     if (data.status === 'success') {
-      console.log(data.user);
       setUser(data.user);
     }
   };
@@ -22,10 +21,8 @@ function User() {
   }, [refresh]);
 
   const blockUser = async (e) => {
-    console.log(e);
     const data = await getUniqueUsersAPI(e, currentUserToken);
     if (data.status === 'success') {
-      console.log(data.newUser);
       setRefresh(!refresh);
     }
   };

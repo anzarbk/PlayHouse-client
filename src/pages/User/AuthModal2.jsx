@@ -13,7 +13,6 @@ const AuthModal2 = ({ mov, index }) => {
     e.preventDefault();
     setOpen(true);
   };
-  // const [currentPage, setCurrentPage] = useState('');
   return (
     <>
       <Slide index={index}>

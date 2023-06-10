@@ -24,7 +24,6 @@ const AuthModal2 = ({ mov, index }) => {
     setOpen(true);
     set;
   };
-  // const [currentPage, setCurrentPage] = useState('');
   return (
     <>
       <Card index={index} sx={{ maxWidth: 200, height: 300 }}>

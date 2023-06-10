@@ -75,7 +75,6 @@ const Seats = ({ setSeatCharter }) => {
     if (!dataV) return;
     const { row, column } = dataV;
     const seatChart = seatCharter(row, column);
-    console.log({ seatChart });
     setSeats(seatChart);
   };
 
@@ -118,16 +117,13 @@ const Seats = ({ setSeatCharter }) => {
   const currentUserToken = useSelector((state) => state?.token?.data);
   const uploadTheatre = async () => {
     const data = { seats, screenName };
-    console.log(data);
     const charter = await seatCharterAPI(data, currentUserToken);
     if (charter.status === 'success') {
-      console.log(charter);
+
       setOpen(true);
-      // dispatch(theatreDataActions.setTheatre(charter?.theatre));
       setSucess('seat Updated successfully');
     }
     setSeatCharter(false);
-    console.log(charter);
   };
   return (
     <div className="flex flex-col justify-center mt-10">

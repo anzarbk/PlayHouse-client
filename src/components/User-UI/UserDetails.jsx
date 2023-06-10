@@ -187,10 +187,8 @@ const UserDetails = () => {
     event.preventDefault();
     const dataV = verifyData(); //#####################???????????????????????
     if (!dataV || !currentUserToken) return;
-    console.log(dataV);
-    console.log(currentUserToken);
+
     const data = await profileEditAPI(dataV, currentUserToken);
-    console.log(data);
     if (data.status === 'success') {
       setOpen(true);
       setSucess('Profile Updated successfully');
@@ -201,7 +199,6 @@ const UserDetails = () => {
 
   const currentUser = useSelector((state) => state?.user?.data); //##### This function for fetch data from redux
   const getUserFromRedux = () => {
-    console.log(currentUser?.userName);
     setUserName(currentUser?.userName || '');
     setEmail(currentUser?.email || '');
     setFirstName(currentUser?.firstName || '');
