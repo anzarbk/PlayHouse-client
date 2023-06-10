@@ -225,7 +225,6 @@ const SeatcharterUserView = () => {
             <p className="flex justify-center font-extrabold text-red-500"></p>
           )}
           <div className="flex flex-col  gap-4 w-auto items-center">
-
             <div className="px-2 py-2 bg-slate-300 rounded-md">
               <div className=" flex flex-col sm:flex-row rounded-md xl:flex-col justify-between items-center bg-gray-100  sm:py-0  px-2 w-96">
                 <div className="flex flex-col justify-between  w-full space-y-2">
@@ -243,7 +242,7 @@ const SeatcharterUserView = () => {
                   </div>
                   <p className="text-base font-semibold leading-none text-gray-600">₹{newAmount}</p>
                 </div>
-                <div className=" sm:mt-0 py-2 w-52 sm:w-96 xl:w-auto">
+                <div className=" sm:mt-0 py-2 w-52 sm:w-96">
                   <img src={getImagePath(populatedShow?.movie?.poster_path)} />
                 </div>
               </div>
@@ -257,7 +256,6 @@ const SeatcharterUserView = () => {
                     tagline: false,
                     shape: 'pill',
                   }}
-
                   createOrder={(data, actions) => {
                     return actions.order.create({
                       purchase_units: [
@@ -278,9 +276,7 @@ const SeatcharterUserView = () => {
                   onError={(err) => {
                     console.log(err);
                   }}
-                  onCancel={() => {
-
-                  }}
+                  onCancel={() => {}}
                 />
               </PayPalScriptProvider>
               <span className="flex justify-center text-xs">OR</span>
