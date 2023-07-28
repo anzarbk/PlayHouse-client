@@ -242,7 +242,7 @@ const SeatcharterUserView = () => {
                   </div>
                   <p className="text-base font-semibold leading-none text-gray-600">₹{newAmount}</p>
                 </div>
-                <div className=" sm:mt-0 py-2 w-52 sm:w-96">
+                <div className=" sm:mt-0 py-2 w-52 ">
                   <img src={getImagePath(populatedShow?.movie?.poster_path)} />
                 </div>
               </div>
